@@ -23,23 +23,126 @@ export const Car = () => (
             <Image src="/close.png" alt="3d Marvel" width={20} height={20} />
           </S.Close>
         </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Image src="/3dMan.jpg" alt="3d Marvel" width={100} height={100} />
-            <h3>3-D MAN</h3>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            overflow: 'auto',
+            height: '55%',
+            marginTop: '10px'
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginRight: '10px'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}
+            >
+              <Image
+                src="/3dMan.jpg"
+                alt="3d Marvel"
+                width={100}
+                height={100}
+              />
+              <h3>3-D MAN</h3>
+            </div>
+            <Image src="/excluir.png" alt="3d Marvel" width={20} height={20} />
           </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Image src="/3dMan.jpg" alt="3d Marvel" width={100} height={100} />
-            <h3>3-D MAN</h3>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginRight: '10px'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}
+            >
+              <Image
+                src="/3dMan.jpg"
+                alt="3d Marvel"
+                width={100}
+                height={100}
+              />
+              <h3>3-D MAN</h3>
+            </div>
+            <Image src="/excluir.png" alt="3d Marvel" width={20} height={20} />
           </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Image src="/3dMan.jpg" alt="3d Marvel" width={100} height={100} />
-            <h3>3-D MAN</h3>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginRight: '10px'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}
+            >
+              <Image
+                src="/3dMan.jpg"
+                alt="3d Marvel"
+                width={100}
+                height={100}
+              />
+              <h3>3-D MAN</h3>
+            </div>
+            <Image src="/excluir.png" alt="3d Marvel" width={20} height={20} />
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginRight: '10px'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}
+            >
+              <Image
+                src="/3dMan.jpg"
+                alt="3d Marvel"
+                width={100}
+                height={100}
+              />
+              <h3>3-D MAN</h3>
+            </div>
+            <Image src="/excluir.png" alt="3d Marvel" width={20} height={20} />
           </div>
         </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+            marginTop: '10px'
+          }}
+        >
+          <p>Totais adcionados:</p>
+          <p>Destinatário:</p>
+        </div>
 
-        <Popover.Arrow className="PopoverArrow" />
+        <S.Arrow />
       </S.Container>
     </Popover.Portal>
   </Popover.Root>

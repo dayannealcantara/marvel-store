@@ -40,7 +40,7 @@ export const Modal = ({ onClose }: ModalProps) => {
             </div>
           </S.Teste>
           <S.ContainerAdd>
-            <S.AddItem>Adicionar</S.AddItem>
+            <S.AddItem>Adicionar ao carinho</S.AddItem>
           </S.ContainerAdd>
         </S.ModalContent>
       </S.ContainerModal>

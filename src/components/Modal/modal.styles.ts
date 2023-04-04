@@ -18,7 +18,7 @@ export const CloseModal = styled.button`
 export const ContainerAdd = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-right: 100px;
+  padding-right: 80px;
 `;
 export const AddItem = styled.button`
   font-size: 20px;

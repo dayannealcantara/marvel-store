@@ -20,3 +20,9 @@ export const Close = styled(Popover.Close)`
   cursor: pointer;
   color: black;
 `;
+export const Arrow = styled(Popover.Arrow)`
+  width: 18px;
+  height: 10px;
+  fill: black;
+  margin-bottom: 0.5rem;
+`;
