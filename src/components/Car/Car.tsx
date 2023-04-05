@@ -139,9 +139,10 @@ export const Car = () => (
           }}
         >
           <p>Totais adcionados:</p>
-          <p>Destinatário:</p>
+          <div>
+            <button>Finalizar compra</button>
+          </div>
         </div>
-
         <S.Arrow />
       </S.Container>
     </Popover.Portal>
