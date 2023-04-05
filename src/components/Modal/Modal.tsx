@@ -16,7 +16,7 @@ export const Modal = ({ onClose }: ModalProps) => {
           </S.CloseModal>
         </S.ContainerClose>
         <S.ModalContent>
-          <S.Teste>
+          <S.Details>
             <Image src="/3dMan.jpg" alt="3d Marvel" width={400} height={300} />
             <div>
               <div>
@@ -38,7 +38,7 @@ export const Modal = ({ onClose }: ModalProps) => {
                 <p> Marvel Premiere (1972 - 1981)</p>
               </div>
             </div>
-          </S.Teste>
+          </S.Details>
           <S.ContainerAdd>
             <S.AddItem>Adicionar ao carinho</S.AddItem>
           </S.ContainerAdd>
