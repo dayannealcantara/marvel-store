@@ -3,6 +3,7 @@ import * as Popover from '@radix-ui/react-popover';
 
 import Image from 'next/image';
 import * as S from './car.style';
+import Link from 'next/link';
 
 export const Car = () => (
   <Popover.Root>
@@ -138,9 +139,10 @@ export const Car = () => (
             marginTop: '10px'
           }}
         >
-          <p>Totais adcionados:</p>
           <div>
-            <button>Finalizar compra</button>
+            <Link href="/checkout">
+              <button>Finalizar compra</button>
+            </Link>
           </div>
         </div>
         <S.Arrow />
