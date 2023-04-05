@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken, lighten } from "polished";
+import { darken, lighten } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +9,6 @@ export const Container = styled.div`
   padding: 6rem;
   min-height: 100vh;
 `;
-
 
 export const ProductList = styled.ul`
   display: grid;
@@ -55,11 +54,11 @@ export const ProductList = styled.ul`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.06, "#7159c1")};
+        background: ${darken(0.06, '#7159c1')};
       }
 
       &:disabled {
-        background: ${lighten(0.25, "#7159c1")};
+        background: ${lighten(0.25, '#7159c1')};
         cursor: not-allowed;
       }
 

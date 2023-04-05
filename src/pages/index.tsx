@@ -1,18 +1,17 @@
 import Header from 'components/Header';
-import { useEffect, useMemo, useState } from 'react';
-import Head from 'next/head'
+import React, { useEffect, useMemo, useState } from 'react';
+import Head from 'next/head';
 import * as S from './styles';
-import { CartFill } from "@styled-icons/bootstrap/CartFill";
+import { CartFill } from '@styled-icons/bootstrap/CartFill';
 import md5 from 'md5';
 import api from 'services/api';
-import { formatPrice } from "../utils/format";
+import { formatPrice } from '../utils/format';
 import { useCart } from 'context/useCart';
 
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
 const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
 const time = Number(new Date());
 const hash = md5(time + privateKey + publicKey);
-
 
 export default function Home() {
   const [comics, setComics] = useState<any[]>([]);
@@ -30,7 +29,7 @@ export default function Home() {
       const response = await api.get(
         `comics?ts=${time}&apikey=${publicKey}&hash=${hash}&offset=0`
       );
-      
+
       setComics(response.data.data.results);
     } catch {
       console.log('error');
@@ -41,8 +40,6 @@ export default function Home() {
     getComics();
   }, []);
 
- 
-
   return (
     <>
       <Head>
@@ -52,36 +49,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <S.Container>
-       <Header totalCard={cart.length}/>
-       <S.ProductList>
-      {comics.map(comic =>(
-          <li key={comic.id} >
-          <img  src={`${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}`}
-            alt={comic.title}/>
-          <strong>{comic.title}</strong>
-          <span>{formatPrice(comic.prices[0].price)}</span>
-          <button
-            type="button"
-     
-     
-            onClick={() =>    addComic(comic)}
-          >
-            <div data-testid="cart-product-quantity">
-              <CartFill size={16} color="#FFF" />
-              {cartMap[comic.id] || 0}
-            </div>
+        <Header totalCard={cart.length} />
+        <S.ProductList>
+          {comics.map((comic) => (
+            <li key={comic.id}>
+              <img
+                src={`${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}`}
+                alt={comic.title}
+              />
+              <strong>{comic.title}</strong>
+              <span>{formatPrice(comic.prices[0].price)}</span>
+              <button type="button" onClick={() => addComic(comic)}>
+                <div data-testid="cart-product-quantity">
+                  <CartFill size={16} color="#FFF" />
+                  {cartMap[comic.id] || 0}
+                </div>
 
-            <span>ADICIONAR AO CARRINHO</span>
-          </button>
-        </li>))}
-  
-       
-       
-        
-      
- 
-    </S.ProductList>
-     </S.Container>
+                <span>ADICIONAR AO CARRINHO</span>
+              </button>
+            </li>
+          ))}
+        </S.ProductList>
+      </S.Container>
     </>
-  )
+  );
 }

@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-} from "react";
-
-
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 interface CartProviderProps {
   children: ReactNode;
@@ -27,7 +20,7 @@ interface CartContextData {
   removeProduct: (productId: number) => void;
   updateProductAmount: ({
     productId,
-    amount,
+    amount
   }: UpdateProductAmount) => Promise<void>;
 }
 
@@ -36,26 +29,21 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<any[]>([]);
 
-
-
   const addComic = async (comic: any): Promise<void> => {
+    const updatedCart = [...cart];
 
-      const updatedCart = [...cart];
+    const comicExists = updatedCart.find(
+      (cartProduct) => cartProduct.id === comic.id
+    );
 
-      const comicExists = updatedCart.find(
-        (cartProduct) => cartProduct.id === comic.id
-      );
+    if (!comicExists) {
+      comic.amount = 1;
+      setCart([...updatedCart, comic]);
+      return;
+    }
 
-      if (!comicExists) {
-     
-       comic.amount = 1;
-        setCart([...updatedCart, comic]);
-        return;
-      }
-
-      comicExists.amount++;
-      setCart(updatedCart);
-   
+    comicExists.amount++;
+    setCart(updatedCart);
   };
 
   const removeProduct = (productId: number): void => {
@@ -75,12 +63,8 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
-
-
   return (
-    <CartContext.Provider
-      value={{ cart, addComic, removeProduct }}
-    >
+    <CartContext.Provider value={{ cart, addComic, removeProduct }}>
       {children}
     </CartContext.Provider>
   );
