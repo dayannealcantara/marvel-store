@@ -10,6 +10,35 @@ export const Container = styled.div`
   min-height: 100vh;
 `;
 
+export const AddItem = styled.button`
+  background: #7159c1;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: ${darken(0.06, '#7159c1')};
+  }
+
+  &:disabled {
+    background: ${lighten(0.25, '#7159c1')};
+    cursor: not-allowed;
+  }
+`;
+
+export const ContainerOpenModal = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const ContainerOpen = styled.button`
+  background: transparent;
+`;
+
 export const ProductList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -51,7 +80,6 @@ export const ProductList = styled.ul`
 
       display: flex;
       align-items: center;
-      transition: background 0.2s;
 
       &:hover {
         background: ${darken(0.06, '#7159c1')};
