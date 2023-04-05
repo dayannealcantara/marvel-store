@@ -34,10 +34,11 @@ const Home: NextPage = () => {
     <>
       <S.WrapperHeader>
         <Header />
-        <S.WrapperInput>
-          <Input />
-        </S.WrapperInput>
       </S.WrapperHeader>
+      <S.WrapperInput>
+        <Input />
+      </S.WrapperInput>
+
       <S.WrapperList>
         {cardMarvel.map((card) => (
           <Card key={card.name} name={card.name} imageUrl={card.imageUrl} />

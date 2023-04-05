@@ -1,31 +1,35 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+  @media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+  @media (max-width: 720px) {
+    html {
+      font-size: 87.5%;
+    }
   }
   body {
-    color: white;
-    background: black;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
   }
-}
-
+  body, input, button {
+    font: 14px Roboto, sans-serif;
+  }
+  #root {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+  }
+  button {
+    cursor: pointer;
+  }
 `;

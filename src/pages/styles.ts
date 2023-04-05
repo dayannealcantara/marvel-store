@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const WrapperHeader = styled.header`
   display: flex;
+  width: 100%;
   flex-direction: column;
-  padding: 2rem 5rem;
 `;
 
 export const WrapperInput = styled.div`
