@@ -1,12 +1,16 @@
 import type { AppProps } from 'next/app';
 import { GlobalStyle } from 'styles/global';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <GlobalStyle />
+      <Head>
+        <title>Marvel</title>
+      </Head>
       <Component {...pageProps} />
+      <GlobalStyle />
     </>
   );
-}
+};
 export default MyApp;
