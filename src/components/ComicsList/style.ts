@@ -3,6 +3,7 @@ import { darken, lighten } from 'polished';
 
 export const ProductList = styled.ul`
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   list-style: none;
@@ -70,4 +71,8 @@ export const ProductList = styled.ul`
       }
     }
   }
+`;
+
+export const WrapperScroll = styled.div`
+  width: 100%;
 `;

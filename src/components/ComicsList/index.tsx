@@ -1,56 +1,83 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Modal } from 'components/Modal';
-import md5 from 'md5';
-import api from 'services/api';
-import { ProductList } from './style';
+import { ProductList, WrapperScroll } from './style';
 import { useCart } from 'context/useCart';
 import { ComicsCard } from 'components/ComicsCard';
+import { IComic, IComicSelected, ICreator } from 'types/comics.interfaces';
 
-const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
-const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
-const time = Number(new Date());
-const hash = md5(time + privateKey + publicKey);
+import { getCreatorsComic } from 'services/getCreatorsComic';
+import { ComicsCardShimmer } from 'components/ComicsCardShimmer';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useComics } from 'context/useComics';
 
 export const ComicsList = () => {
   const [showModal, setShowModal] = useState(false);
-  const [comics, setComics] = useState<any[]>([]);
-  const { addComic, cart } = useCart();
+  const { comics, PlusComics, hasMore } = useComics();
+  const [comicState, setComicState] = useState<IComicSelected>();
+  const { addComic, cartMap } = useCart();
 
-  const cartMap = useMemo(() => {
-    return cart.reduce((acc, item) => {
-      acc[item.id] = item.amount;
-      return acc;
-    }, {});
-  }, [cart]);
-
-  const getComics = async () => {
+  const openModalDatails = async (comic: IComic) => {
     try {
-      const response = await api.get(
-        `comics?ts=${time}&apikey=${publicKey}&hash=${hash}&offset=0`
-      );
+      const response = await getCreatorsComic(comic.id);
 
-      setComics(response.data.data.results);
-    } catch {
-      console.log('error');
+      const comicData = {
+        id: comic.id,
+        title: comic.title,
+        pageCount: comic.pageCount,
+        description: comic.description,
+        image: `${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}`,
+        creators: response.map((creator: ICreator) => {
+          return {
+            fullName: creator.fullName
+          };
+        })
+      };
+
+      setComicState(comicData);
+      setShowModal(true);
+    } catch (error) {
+      // console.log('error', error);
     }
   };
 
-  useEffect(() => {
-    getComics();
-  }, []);
-
   return (
-    <ProductList>
-      {comics.map((comic) => (
-        <ComicsCard
-          key={comic.id}
-          setShowModal={setShowModal}
-          totalCart={cartMap[comic.id] || 0}
-          comic={comic}
-          addComic={addComic}
+    <>
+      <WrapperScroll id="scrollableDiv">
+        <InfiniteScroll
+          dataLength={comics.length}
+          next={PlusComics}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+        >
+          <ProductList>
+            {comics.length === 0 ? (
+              <ComicsCardShimmer size={6} />
+            ) : (
+              comics?.map((comic, index) => (
+                <ComicsCard
+                  key={comic.id + index}
+                  onClick={() => openModalDatails(comic)}
+                  totalCart={cartMap[comic.id] || 0}
+                  comic={comic}
+                  addComic={addComic}
+                />
+              ))
+            )}
+          </ProductList>
+        </InfiniteScroll>
+      </WrapperScroll>
+      {showModal && (
+        <Modal
+          title={comicState?.title || ''}
+          creators={comicState?.creators}
+          description={comicState?.description}
+          image={comicState?.image || ''}
+          onClick={() => addComic(comicState)}
+          pageCount={comicState?.pageCount}
+          totalCart={cartMap[comicState?.id] || 0}
+          onClose={() => setShowModal(false)}
         />
-      ))}
-      {showModal && <Modal onClose={() => setShowModal(false)} />}
-    </ProductList>
+      )}
+    </>
   );
 };
