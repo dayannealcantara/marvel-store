@@ -7,7 +7,7 @@ import { useCart } from 'context/useCart';
 import { ComicsList } from '../components/ComicsList';
 
 export default function Home() {
-  const { addComic, cart } = useCart();
+  const { cart } = useCart();
 
   return (
     <>
