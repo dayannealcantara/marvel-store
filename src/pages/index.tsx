@@ -1,46 +1,13 @@
 import Header from 'components/Header';
-import React, { useEffect, useMemo, useState } from 'react';
+
 import Head from 'next/head';
 import * as S from './styles';
-import { CartFill } from '@styled-icons/bootstrap/CartFill';
-import md5 from 'md5';
-import api from 'services/api';
-import { formatPrice } from '../utils/format';
-import { useCart } from 'context/useCart';
-import { Modal } from 'components/Modal/Modal';
 
-const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
-const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
-const time = Number(new Date());
-const hash = md5(time + privateKey + publicKey);
+import { useCart } from 'context/useCart';
+import { ComicsList } from '../components/ComicsList';
 
 export default function Home() {
-  const [comics, setComics] = useState<any[]>([]);
   const { addComic, cart } = useCart();
-  const [showModal, setShowModal] = useState(false);
-
-  const cartMap = useMemo(() => {
-    return cart.reduce((acc, item) => {
-      acc[item.id] = item.amount;
-      return acc;
-    }, {});
-  }, [cart]);
-
-  const getComics = async () => {
-    try {
-      const response = await api.get(
-        `comics?ts=${time}&apikey=${publicKey}&hash=${hash}&offset=0`
-      );
-
-      setComics(response.data.data.results);
-    } catch {
-      console.log('error');
-    }
-  };
-
-  useEffect(() => {
-    getComics();
-  }, []);
 
   return (
     <>
@@ -52,30 +19,7 @@ export default function Home() {
       </Head>
       <S.Container>
         <Header totalCard={cart.length} />
-        <S.ProductList>
-          {comics.map((comic) => (
-            <li key={comic.id}>
-              <S.ContainerOpenModal>
-                <S.ContainerOpen onClick={() => setShowModal(true)}>
-                  <img
-                    src={`${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}`}
-                    alt={comic.title}
-                  />
-                </S.ContainerOpen>
-              </S.ContainerOpenModal>
-              {showModal ? <Modal onClose={() => setShowModal(false)} /> : null}
-              <strong>{comic.title}</strong>
-              <span>{formatPrice(comic.prices[0].price)}</span>
-              <S.AddItem type="button" onClick={() => addComic(comic)}>
-                <div data-testid="cart-product-quantity">
-                  <CartFill size={16} color="#FFF" />
-                  {cartMap[comic.id] || 0}
-                </div>
-                <span>ADICIONAR AO CARRINHO</span>
-              </S.AddItem>
-            </li>
-          ))}
-        </S.ProductList>
+        <ComicsList />
       </S.Container>
     </>
   );
