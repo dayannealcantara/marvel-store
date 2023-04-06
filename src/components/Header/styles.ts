@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 export const Container = styled.header`
   display: flex;
@@ -16,23 +17,23 @@ export const Container = styled.header`
   }
 `;
 
-export const Cart = styled.div`
+export const Cart = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
+`;
 
-  div {
-    text-align: right;
-    margin-right: 10px;
+export const ShoppingCart = styled.div`
+  text-align: right;
+  margin-right: 10px;
+`;
 
-    strong {
-      display: block;
-      color: #fff;
-    }
+export const TitleShoppingCart = styled.strong`
+  display: block;
+  color: #fff;
+`;
 
-    span {
-      font-size: 12px;
-      color: #999;
-    }
-  }
+export const TotalItems = styled.span`
+  font-size: 12px;
+  color: #999;
 `;
