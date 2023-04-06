@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { IComic } from 'types/comics.interfaces';
 
 interface CartProviderProps {
   children: ReactNode;
@@ -9,27 +10,19 @@ interface UpdateProductAmount {
   amount: number;
 }
 
-interface StockAmount {
-  [key: number]: number;
-}
-
 interface CartContextData {
-  cart: any[];
-  stock: StockAmount;
-  addComic: (productId: number) => void;
+  cart: IComic[];
+  addComic: (comic: IComic) => void;
   removeProduct: (productId: number) => void;
-  updateProductAmount: ({
-    productId,
-    amount
-  }: UpdateProductAmount) => Promise<void>;
+  updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<IComic[]>([]);
 
-  const addComic = async (comic: any): Promise<void> => {
+  const addComic = async (comic: IComic): Promise<void> => {
     const updatedCart = [...cart];
 
     const comicExists = updatedCart.find(
@@ -47,24 +40,40 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   };
 
   const removeProduct = (productId: number): void => {
-    try {
-      const updatedCart = [...cart];
-      const productIndex = updatedCart.findIndex(
-        (product) => product.id === productId
-      );
+    const updatedCart = [...cart];
+    const productIndex = updatedCart.findIndex(
+      (product) => product.id === productId
+    );
 
-      if (productIndex < 0) throw Error();
+    if (productIndex < 0) throw Error();
 
-      updatedCart.splice(productIndex, 1);
+    updatedCart.splice(productIndex, 1);
 
-      setCart(updatedCart);
-    } catch {
-      // toast.error("Erro na remoção do produto");
-    }
+    setCart(updatedCart);
+  };
+
+  const updateProductAmount = async ({
+    productId,
+    amount
+  }: UpdateProductAmount): Promise<void> => {
+    if (amount < 1) throw Error();
+
+    const updatedCart = [...cart];
+    const productExists = updatedCart.find(
+      (product) => product.id === productId
+    );
+
+    if (!productExists) throw Error();
+
+    productExists.amount = amount;
+
+    setCart(updatedCart);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addComic, removeProduct }}>
+    <CartContext.Provider
+      value={{ cart, addComic, removeProduct, updateProductAmount }}
+    >
       {children}
     </CartContext.Provider>
   );
