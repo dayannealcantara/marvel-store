@@ -9,45 +9,70 @@ import {
   Info,
   TitleInfo,
   Description,
-  TitleComic
+  TitleComic,
+  WrapperCreators,
+  CreatorName,
+  ImageComic,
+  WrapperBotton
 } from './styles';
+import { IComicSelected } from 'types/comics.interfaces';
+import { BottonAddCart } from 'components/BottonAddCart';
 
-type ModalProps = {
+interface ModalProps extends IComicSelected {
   onClose?: () => void;
-};
+  onClick: () => void;
+  totalCart: number;
+}
 
-export const Modal = ({ onClose }: ModalProps) => {
+export const Modal = ({
+  onClose,
+  title,
+  image,
+  description,
+  pageCount,
+  creators,
+  onClick,
+  totalCart
+}: ModalProps) => {
   return (
     <ModalLayout>
       <ContainerModal>
         <ContainerHeader>
-          <TitleComic>3-D MAN</TitleComic>
+          <TitleComic>{title}</TitleComic>
           <Close onClick={onClose}>
-            <Image src="/close.png" alt="3d Marvel" width={20} height={20} />
+            <Image src="/close.png" alt="Close" width={20} height={20} />
           </Close>
         </ContainerHeader>
         <Details>
-          <Image src="/logo.jpg" alt="3d Marvel" width={300} height={200} />
+          <div
+            style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}
+          >
+            <ImageComic src={image} alt={title} width={300} height={200} />
+            <WrapperBotton>
+              <BottonAddCart onClick={onClick} totalCart={totalCart} />
+            </WrapperBotton>
+          </div>
           <ContainerInfo>
-            <Info>
-              <TitleInfo>ID</TitleInfo>
-              <Description>1011334</Description>
-            </Info>
-            <Info>
-              <TitleInfo>DESCRIÇÃO</TitleInfo>
-              <Description>No description</Description>
-            </Info>
-            <Info>
-              <TitleInfo>DATA DE MODIFICAÇÃO</TitleInfo>
-              <Description>2014-04-29T14:18:17-0400</Description>
-            </Info>
-            <Info>
-              <TitleInfo>ÚLTIMAS HQS</TitleInfo>
-              <Description>Avengers: The Initiative (2007 - 2010) </Description>
-              <Description>Deadpool (1997 - 2002)</Description>Deadpool (1997 -
-              2002)
-              <Description> Marvel Premiere (1972 - 1981)</Description>
-            </Info>
+            <div
+              style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}
+            >
+              <Info>
+                <TitleInfo>DESCRIÇÃO</TitleInfo>
+                <Description>{description || 'No description'}</Description>
+              </Info>
+              <Info>
+                <TitleInfo>Total Paginas</TitleInfo>
+                <Description>{pageCount}</Description>
+              </Info>
+              <Info>
+                <TitleInfo>Criadores</TitleInfo>
+                {creators?.map((creator, index) => (
+                  <WrapperCreators key={index}>
+                    <CreatorName>{creator.fullName}</CreatorName>
+                  </WrapperCreators>
+                ))}
+              </Info>
+            </div>
           </ContainerInfo>
         </Details>
       </ContainerModal>

@@ -5,18 +5,21 @@ export const ModalLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
   top: 0;
+  z-index: 2;
   left: 0;
-  background: rgba(0, 0, 0, 0.05);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(35, 27, 34, 0.7);
 `;
 export const ContainerModal = styled.div`
   background: #fff;
+  position: fixed;
   color: #000;
-  width: 50%;
-  height: 60%;
+  width: 70%;
+  min-height: 50%;
   border-radius: 20px;
+  padding: 20px 10px;
 `;
 export const ContainerHeader = styled.div`
   display: flex;
@@ -36,13 +39,14 @@ export const Close = styled.button`
 export const Details = styled.div`
   padding: 0 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  height: 80%;
 `;
 export const ContainerInfo = styled.div`
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
+  width: 50%;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
 `;
 export const Info = styled.div`
@@ -53,3 +57,17 @@ export const Info = styled.div`
 export const TitleInfo = styled.h2``;
 export const Description = styled.p``;
 export const TitleComic = styled.h1``;
+
+export const WrapperCreators = styled.div``;
+export const WrapperBotton = styled.div`
+  width: 100%;
+`;
+
+export const CreatorName = styled.p``;
+
+export const ImageComic = styled.img`
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  max-height: 400px;
+`;
