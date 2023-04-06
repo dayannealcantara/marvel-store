@@ -4,6 +4,7 @@ A aplicação tem como função listar, detalhar e adicionar ao carinho de compr
 
 # Tecnologias utilizadas
 * NextJS;
+* TypeScript;
 * Styled-componenets;
 * ContextAPI;
 
