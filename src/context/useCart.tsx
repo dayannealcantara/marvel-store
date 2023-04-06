@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { IComic } from 'types/comics.interfaces';
 
 interface CartProviderProps {
@@ -6,15 +6,16 @@ interface CartProviderProps {
 }
 
 interface UpdateProductAmount {
-  productId: number;
+  productId: string;
   amount: number;
 }
 
 interface CartContextData {
   cart: IComic[];
   addComic: (comic: IComic) => void;
-  removeProduct: (productId: number) => void;
+  removeProduct: (productId: string) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
+  cartMap: Record<string, number>;
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -39,7 +40,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     setCart(updatedCart);
   };
 
-  const removeProduct = (productId: number): void => {
+  const removeProduct = (productId: string): void => {
     const updatedCart = [...cart];
     const productIndex = updatedCart.findIndex(
       (product) => product.id === productId
@@ -70,9 +71,16 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     setCart(updatedCart);
   };
 
+  const cartMap = useMemo(() => {
+    return cart.reduce((acc: any, item) => {
+      acc[item.id] = item.amount;
+      return acc;
+    }, {});
+  }, [cart]);
+
   return (
     <CartContext.Provider
-      value={{ cart, addComic, removeProduct, updateProductAmount }}
+      value={{ cart, addComic, removeProduct, updateProductAmount, cartMap }}
     >
       {children}
     </CartContext.Provider>
