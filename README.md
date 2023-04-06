@@ -7,20 +7,24 @@ A aplicação tem como função listar, detalhar e adicionar ao carinho de compr
 * Styled-componenets;
 * ContextAPI;
 
-
 # Requistos funcionais da aplicação 
 
 * Tela carregar quadrinhos;
 * Modal com detalhes do quadrinho selecionado;
 * Tela de carinho com resumo de compra dos quadrinhos;
+* Detalhamento de entrega ao destinatário;
 
- # Quadrinhos
+# Quadrinhos
  
-Tela de carregar quadrinhos realiza o consumo da API da marvel, carrengado um array de objetos com as capas e informações dos quadrinhos.
+Na tela inicial é renderizada a listagem  com as capas e informações dos quadrinhos, através do consumo da API da marvel; tendo também um ícone de carinho de compras que mostra o total de itens adicionados.
+
+# Modal
+ 
+No modal é possível ver mais detalhes do quadrinho selecionado.
 
 # Comprar
 
-Tela comprar realizar uma requisição do API do google maps, onde o mapa é carregado para o usuario inserir a sua localização, também é possivel ver informações do quadrinho que o usuario escolheu.
+A tela  de compra mostra as informações dos quadrinhos adicionados pelo usuário, também é possível mostrar através da inserção de endereço do mesmo a localização de destino da entrega através da requisição da API do google maps.
 
 # Local de Desenvolvimento
 
