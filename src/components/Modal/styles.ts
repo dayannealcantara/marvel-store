@@ -37,11 +37,13 @@ export const Close = styled.button`
 `;
 
 export const Details = styled.div`
-  padding: 0 20px;
+  padding: 10px 30px;
   display: flex;
-  height: 80%;
+  justify-content: center;
+  gap: 100px;
+  height: 90%;
 `;
-export const ContainerInfo = styled.div`
+export const ContainerDescription = styled.div`
   padding: 0 20px;
   display: flex;
   width: 50%;
@@ -49,14 +51,33 @@ export const ContainerInfo = styled.div`
   justify-content: space-between;
   gap: 10px;
 `;
+export const ContainerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
-export const TitleInfo = styled.h2``;
-export const Description = styled.p``;
-export const TitleComic = styled.h1``;
+export const InfoPage = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+`;
+export const TitleInfo = styled.h2`
+  text-transform: uppercase;
+`;
+export const Description = styled.p`
+  line-height: 1.4rem;
+  text-align: justify;
+`;
+export const TitleComic = styled.h1`
+  text-transform: uppercase;
+`;
 
 export const WrapperCreators = styled.div``;
 export const WrapperBotton = styled.div`

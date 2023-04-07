@@ -9,11 +9,13 @@ import {
   Info,
   TitleInfo,
   Description,
+  ContainerDescription,
   TitleComic,
   WrapperCreators,
   CreatorName,
   ImageComic,
-  WrapperBotton
+  WrapperBotton,
+  InfoPage
 } from './styles';
 import { IComicSelected } from 'types/comics.interfaces';
 import { BottonAddCart } from 'components/BottonAddCart';
@@ -44,26 +46,22 @@ export const Modal = ({
           </Close>
         </ContainerHeader>
         <Details>
-          <div
-            style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}
-          >
+          <ContainerInfo>
             <ImageComic src={image} alt={title} width={300} height={200} />
+            <InfoPage>
+              <TitleInfo>Total Paginas: {pageCount}</TitleInfo>
+            </InfoPage>
             <WrapperBotton>
               <BottonAddCart onClick={onClick} totalCart={totalCart} />
             </WrapperBotton>
-          </div>
-          <ContainerInfo>
-            <div
-              style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}
-            >
+          </ContainerInfo>
+          <ContainerDescription>
+            <ContainerInfo>
               <Info>
-                <TitleInfo>DESCRIÇÃO</TitleInfo>
+                <TitleInfo>Descrição</TitleInfo>
                 <Description>{description || 'No description'}</Description>
               </Info>
-              <Info>
-                <TitleInfo>Total Paginas</TitleInfo>
-                <Description>{pageCount}</Description>
-              </Info>
+
               <Info>
                 <TitleInfo>Criadores</TitleInfo>
                 {creators?.map((creator, index) => (
@@ -72,8 +70,8 @@ export const Modal = ({
                   </WrapperCreators>
                 ))}
               </Info>
-            </div>
-          </ContainerInfo>
+            </ContainerInfo>
+          </ContainerDescription>
         </Details>
       </ContainerModal>
     </ModalLayout>
