@@ -1,18 +1,5 @@
 import Header from 'components/Header';
-import {
-  Container,
-  Wrapper,
-  Footer,
-  Checkout,
-  ButtonCart,
-  ProductTable,
-  ImageComics,
-  Input,
-  PriceComics,
-  Total,
-  Title,
-  TotalComics
-} from './styles';
+import * as S from './styles';
 import { Delete } from '@styled-icons/material/Delete';
 import { RemoveCircleOutline } from '@styled-icons/material/RemoveCircleOutline';
 import { AddCircleOutline } from '@styled-icons/material/AddCircleOutline';
@@ -20,17 +7,19 @@ import { useCart } from 'context/useCart';
 import { formatPrice } from 'utils/format';
 import EmptyCart from 'components/EmptyCart';
 import { IProduct } from 'types/products.interfaces';
+import Link from 'next/link';
+import { Container } from 'pages/styles';
 
 const Cart = () => {
   const { cart, updateProductAmount, removeProduct } = useCart();
 
   const cartFormatted = cart.map((product) => {
-    const subTotal = product?.amount * product.prices[0]?.price;
+    const subTotal = product.amount * product.prices[0].price;
     return {
       ...product,
       subTotal,
       subTotalFormatted: formatPrice(subTotal),
-      priceFormatted: formatPrice(product.prices[0]?.price)
+      priceFormatted: formatPrice(product.prices[0].price)
     };
   });
 
@@ -49,19 +38,19 @@ const Cart = () => {
     updateProductAmount({ productId: product.id, amount: product.amount - 1 });
   }
 
-  function handleRemoveProduct(productId: number) {
+  function handleRemoveProduct(productId: string) {
     removeProduct(productId);
   }
 
   return (
     <Container>
       <Header totalCard={cart.length} cartActive={false} />
-      <Wrapper>
+      <S.Wrapper>
         {cart.length === 0 ? (
           <EmptyCart />
         ) : (
           <>
-            <ProductTable>
+            <S.ProductTable>
               <thead>
                 <tr>
                   <th aria-label="product image" />
@@ -73,61 +62,63 @@ const Cart = () => {
               </thead>
               <tbody>
                 {cartFormatted.map((product) => (
-                  <tr key={product.id} data-testid="product">
+                  <tr key={product.id}>
                     <td>
-                      <ImageComics
+                      <img
                         src={`${product.thumbnail.path}/portrait_incredible.${product.thumbnail.extension}`}
                         alt={product.title}
                       />
                     </td>
                     <td>
-                      <Title>{product.title}</Title>
-                      <PriceComics>{product.priceFormatted}</PriceComics>
+                      <strong>{product.title}</strong>
+                      <span>{product.priceFormatted}</span>
                     </td>
                     <td>
                       <div>
-                        <ButtonCart
+                        <button
                           type="button"
                           disabled={product.amount <= 1}
                           onClick={() => handleProductDecrement(product)}
                         >
                           <RemoveCircleOutline size={20} />
-                        </ButtonCart>
-                        <Input type="text" readOnly value={product.amount} />
-                        <ButtonCart
+                        </button>
+                        <input type="text" readOnly value={product.amount} />
+                        <button
                           type="button"
                           onClick={() => handleProductIncrement(product)}
                         >
                           <AddCircleOutline size={20} />
-                        </ButtonCart>
+                        </button>
                       </div>
                     </td>
                     <td>
-                      <PriceComics>{product.subTotalFormatted}</PriceComics>
+                      <strong>{product.subTotalFormatted}</strong>
                     </td>
                     <td>
-                      <ButtonCart
+                      <button
                         type="button"
                         data-testid="remove-product"
                         onClick={() => handleRemoveProduct(product.id)}
                       >
                         <Delete size={20} />
-                      </ButtonCart>
+                      </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
-            </ProductTable>
-            <Footer>
-              <Checkout>Finalizar pedido</Checkout>
-              <Total>
-                <Title>TOTAL</Title>
-                <TotalComics>{total}</TotalComics>
-              </Total>
-            </Footer>
+            </S.ProductTable>
+            <footer>
+              <Link href="/checkout">
+                <button type="button">Finalizar pedido</button>
+              </Link>
+              <S.Total>
+                <span>TOTAL</span>
+                <strong>{total}</strong>
+              </S.Total>
+            </footer>
           </>
         )}
-      </Wrapper>
+      </S.Wrapper>
     </Container>
   );
 };
