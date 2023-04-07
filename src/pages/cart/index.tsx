@@ -1,5 +1,18 @@
 import Header from 'components/Header';
-import * as S from './styles';
+import {
+  Container,
+  Wrapper,
+  Footer,
+  Checkout,
+  ButtonCart,
+  ProductTable,
+  ImageComics,
+  Input,
+  PriceComics,
+  Total,
+  Title,
+  TotalComics
+} from './styles';
 import { Delete } from '@styled-icons/material/Delete';
 import { RemoveCircleOutline } from '@styled-icons/material/RemoveCircleOutline';
 import { AddCircleOutline } from '@styled-icons/material/AddCircleOutline';
@@ -12,12 +25,12 @@ const Cart = () => {
   const { cart, updateProductAmount, removeProduct } = useCart();
 
   const cartFormatted = cart.map((product) => {
-    const subTotal = product.amount * product.prices[0].price;
+    const subTotal = product?.amount * product.prices[0]?.price;
     return {
       ...product,
       subTotal,
       subTotalFormatted: formatPrice(subTotal),
-      priceFormatted: formatPrice(product.prices[0].price)
+      priceFormatted: formatPrice(product.prices[0]?.price)
     };
   });
 
@@ -41,14 +54,14 @@ const Cart = () => {
   }
 
   return (
-    <S.Container>
+    <Container>
       <Header totalCard={cart.length} cartActive={false} />
-      <S.Wrapper>
+      <Wrapper>
         {cart.length === 0 ? (
           <EmptyCart />
         ) : (
           <>
-            <S.ProductTable>
+            <ProductTable>
               <thead>
                 <tr>
                   <th aria-label="product image" />
@@ -62,61 +75,60 @@ const Cart = () => {
                 {cartFormatted.map((product) => (
                   <tr key={product.id} data-testid="product">
                     <td>
-                      <img
+                      <ImageComics
                         src={`${product.thumbnail.path}/portrait_incredible.${product.thumbnail.extension}`}
                         alt={product.title}
                       />
                     </td>
                     <td>
-                      <strong>{product.title}</strong>
-                      <span>{product.priceFormatted}</span>
+                      <Title>{product.title}</Title>
+                      <PriceComics>{product.priceFormatted}</PriceComics>
                     </td>
                     <td>
                       <div>
-                        <button
+                        <ButtonCart
                           type="button"
                           disabled={product.amount <= 1}
                           onClick={() => handleProductDecrement(product)}
                         >
                           <RemoveCircleOutline size={20} />
-                        </button>
-                        <input type="text" readOnly value={product.amount} />
-                        <button
+                        </ButtonCart>
+                        <Input type="text" readOnly value={product.amount} />
+                        <ButtonCart
                           type="button"
                           onClick={() => handleProductIncrement(product)}
                         >
                           <AddCircleOutline size={20} />
-                        </button>
+                        </ButtonCart>
                       </div>
                     </td>
                     <td>
-                      <strong>{product.subTotalFormatted}</strong>
+                      <PriceComics>{product.subTotalFormatted}</PriceComics>
                     </td>
                     <td>
-                      <button
+                      <ButtonCart
                         type="button"
                         data-testid="remove-product"
                         onClick={() => handleRemoveProduct(product.id)}
                       >
                         <Delete size={20} />
-                      </button>
+                      </ButtonCart>
                     </td>
                   </tr>
                 ))}
               </tbody>
-            </S.ProductTable>
-            <footer>
-              <button type="button">Finalizar pedido</button>
-
-              <S.Total>
-                <span>TOTAL</span>
-                <strong>{total}</strong>
-              </S.Total>
-            </footer>
+            </ProductTable>
+            <Footer>
+              <Checkout>Finalizar pedido</Checkout>
+              <Total>
+                <Title>TOTAL</Title>
+                <TotalComics>{total}</TotalComics>
+              </Total>
+            </Footer>
           </>
         )}
-      </S.Wrapper>
-    </S.Container>
+      </Wrapper>
+    </Container>
   );
 };
 
