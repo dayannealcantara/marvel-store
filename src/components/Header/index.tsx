@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 type HeaderProps = {
-  totalCard: number;
+  totalCard?: number;
   cartActive?: boolean;
 };
 const Header = ({ totalCard, cartActive = true }: HeaderProps): JSX.Element => {
