@@ -12,6 +12,7 @@ interface UpdateProductAmount {
 
 interface CartContextData {
   cart: IComic[];
+  setCart: (cart: IComic[]) => void;
   addComic: (comic: IComic) => void;
   removeProduct: (productId: string) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
@@ -80,7 +81,14 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   return (
     <CartContext.Provider
-      value={{ cart, addComic, removeProduct, updateProductAmount, cartMap }}
+      value={{
+        cart,
+        setCart,
+        addComic,
+        removeProduct,
+        updateProductAmount,
+        cartMap
+      }}
     >
       {children}
     </CartContext.Provider>
