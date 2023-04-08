@@ -7,13 +7,15 @@ A aplicação tem como função listar, detalhar e adicionar ao carinho de compr
 * TypeScript;
 * Styled-componenets;
 * ContextAPI;
+* Hooks
 
 # Requistos funcionais da aplicação 
 
-* Tela carregar quadrinhos;
+* Listagem dos quadrinhos com scroll infinito;
 * Modal com detalhes do quadrinho selecionado;
-* Tela de carinho com resumo de compra dos quadrinhos;
-* Detalhamento de entrega ao destinatário;
+* Tela de carinho com resumo de compra;
+* Cadastrar endereço de entrega;
+* Detalhamento de entrega ao destinatário com localização via maps;
 
 # Quadrinhos
  
@@ -30,7 +32,7 @@ A tela  de compra mostra as informações dos quadrinhos adicionados pelo usuár
 # Local de Desenvolvimento
 
 ```
-# Instalar dependencias do package.json
+# Instalar dependências do package.json
 $ yarn 
 
 # Executar projeto
