@@ -3,7 +3,7 @@ import { Modal } from 'components/Modal';
 import { ProductList, WrapperScroll } from './style';
 import { useCart } from 'context/useCart';
 import { ComicsCard } from 'components/ComicsCard';
-import { IComic, IComicSelected, ICreator } from 'types/comics.interfaces';
+import { IComic, ICreator } from 'types/comics.interfaces';
 
 import { getCreatorsComic } from 'services/getCreatorsComic';
 import { ComicsCardShimmer } from 'components/ComicsCardShimmer';
@@ -13,16 +13,22 @@ import { useComics } from 'context/useComics';
 export const ComicsList = () => {
   const [showModal, setShowModal] = useState(false);
   const { comics, PlusComics, hasMore } = useComics();
-  const [comicState, setComicState] = useState<IComicSelected>();
+  const [comicState, setComicState] = useState<IComic>();
   const { addComic, cartMap } = useCart();
 
   const openModalDatails = async (comic: IComic) => {
     try {
       const response = await getCreatorsComic(comic.id);
 
-      const comicData = {
+      const comicData: IComic = {
         id: comic.id,
         title: comic.title,
+        amount: 0,
+        prices: comic.prices,
+        thumbnail: {
+          path: comic.thumbnail.path,
+          extension: comic.thumbnail.extension
+        },
         pageCount: comic.pageCount,
         description: comic.description,
         image: `${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}`,
@@ -66,15 +72,15 @@ export const ComicsList = () => {
           </ProductList>
         </InfiniteScroll>
       </WrapperScroll>
-      {showModal && (
+      {comicState && showModal && (
         <Modal
-          title={comicState?.title || ''}
-          creators={comicState?.creators}
-          description={comicState?.description}
-          image={comicState?.image || ''}
+          title={comicState.title}
+          creators={comicState.creators}
+          description={comicState.description}
+          image={comicState.image}
           onClick={() => addComic(comicState)}
-          pageCount={comicState?.pageCount}
-          totalCart={cartMap[comicState?.id] || 0}
+          pageCount={comicState.pageCount}
+          totalCart={cartMap[comicState.id]}
           onClose={() => setShowModal(false)}
         />
       )}

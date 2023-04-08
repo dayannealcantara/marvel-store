@@ -9,6 +9,8 @@ export interface IComic {
   amount: number;
   description?: string;
   pageCount: number;
+  creators: ICreator[];
+  image: string;
   thumbnail: {
     path: string;
     extension: string;
@@ -17,14 +19,5 @@ export interface IComic {
 
 export interface ICreator {
   fullName: string;
-  image: string;
-}
-
-export interface IComicSelected {
-  id?: string;
-  title: string;
-  description?: string;
-  pageCount?: number;
-  image: string;
-  creators?: ICreator[];
+  image?: string;
 }

@@ -17,10 +17,15 @@ import {
   WrapperBotton,
   InfoPage
 } from './styles';
-import { IComicSelected } from 'types/comics.interfaces';
+import { ICreator } from 'types/comics.interfaces';
 import { BottonAddCart } from 'components/BottonAddCart';
 
-interface ModalProps extends IComicSelected {
+interface ModalProps {
+  title: string;
+  image: string;
+  description?: string;
+  pageCount: number;
+  creators: ICreator[];
   onClose?: () => void;
   onClick: () => void;
   totalCart: number;
