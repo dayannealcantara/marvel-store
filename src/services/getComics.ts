@@ -2,7 +2,7 @@ import md5 from 'md5';
 import api from './api';
 
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
-const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
+const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY ?? '';
 const time = Number(new Date());
 const hash = md5(time + privateKey + publicKey);
 
