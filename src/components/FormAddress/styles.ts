@@ -40,31 +40,28 @@ export const Form = styled.form`
   width: 70%;
   padding-top: 15px;
 `;
+export const Input = styled.input`
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+`;
 
+export const Select = styled.select`
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+`;
+export const Error = styled.p`
+  color: red;
+  font-size: 12px;
+`;
 export const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
-
-  input {
-    height: 30px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0 10px;
-  }
-
-  select {
-    height: 30px;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0 10px;
-  }
-
-  p {
-    color: red;
-    font-size: 12px;
-  }
 `;
 
 export const Button = styled.button`

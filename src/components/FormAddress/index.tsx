@@ -1,4 +1,4 @@
-import * as S from './styles';
+import { Form, ContainerInput, Button, Input, Select, Error } from './styles';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,42 +33,41 @@ const FormAddress = ({ setAddress }: FormAddressProps) => {
   };
 
   return (
-    <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <S.ContainerInput>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <ContainerInput>
         <label htmlFor="road">Rua</label>
-        <input {...register('road')} />
-        <p>{errors.road?.message}</p>
-      </S.ContainerInput>
-      <S.ContainerInput>
+        <Input {...register('road')} />
+        <Error>{errors.road?.message}</Error>
+      </ContainerInput>
+      <ContainerInput>
         <label htmlFor="number">Numero</label>
-        <input {...register('number')} />
-        <p>{errors.number?.message}</p>
-      </S.ContainerInput>
-      <S.ContainerInput>
+        <Input {...register('number')} />
+        <Error>{errors.number?.message}</Error>
+      </ContainerInput>
+      <ContainerInput>
         <label htmlFor="district">Bairro</label>
-        <input {...register('district')} />
-        <p>{errors.district?.message}</p>
-      </S.ContainerInput>
-      <S.ContainerInput>
+        <Input {...register('district')} />
+        <Error>{errors.district?.message}</Error>
+      </ContainerInput>
+      <ContainerInput>
         <label htmlFor="city">Cidade</label>
-        <input {...register('city')} />
-        <p>{errors.city?.message}</p>
-      </S.ContainerInput>
-
-      <S.ContainerInput>
+        <Input {...register('city')} />
+        <Error>{errors.city?.message}</Error>
+      </ContainerInput>
+      <ContainerInput>
         <label htmlFor="state">Estado</label>
-        <select {...register('state')}>
+        <Select {...register('state')}>
           <option value="">Selecione um estado</option>
           {statesBR.map((state) => (
             <option key={state.sigla} value={state.nome}>
               {state.nome}
             </option>
           ))}
-        </select>
-        <p>{errors.state?.message}</p>
-      </S.ContainerInput>
-      <S.Button type="submit">Salvar Enderećo</S.Button>
-    </S.Form>
+        </Select>
+        <Error>{errors.state?.message}</Error>
+      </ContainerInput>
+      <Button type="submit">Salvar Enderećo</Button>
+    </Form>
   );
 };
 
