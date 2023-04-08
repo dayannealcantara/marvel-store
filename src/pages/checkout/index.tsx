@@ -10,8 +10,6 @@ import {
   Name,
   Price,
   Total,
-  Form,
-  ContainerInput,
   Button,
   SubTitle
 } from './styles';
