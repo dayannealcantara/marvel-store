@@ -53,7 +53,7 @@ const Checkout = () => {
     <Container>
       <Header totalCard={cart.length} cartActive={false} />
       <Wrapper>
-        <Title>Finalziar Pedido</Title>
+        <Title>Finalizar Pedido</Title>
 
         <WrapperData>
           <WrapperDatails>
