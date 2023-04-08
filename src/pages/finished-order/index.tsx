@@ -1,5 +1,12 @@
 import Header from 'components/Header';
-import * as S from './styles';
+import {
+  Wrapper,
+  ContainerFinished,
+  WrapperFinished,
+  Title,
+  Description,
+  StartShopping
+} from './styles';
 
 import { Check2Circle } from '@styled-icons/bootstrap/Check2Circle';
 
@@ -9,17 +16,16 @@ const FinishedOrder = () => {
   return (
     <Container>
       <Header cartActive={false} />
-      <S.Wrapper>
-        <S.ContainerFinished>
+      <Wrapper>
+        <ContainerFinished>
           <Check2Circle width={300} />
-
-          <S.WrapperFinished>
-            <S.Title>Pedido Relizado com Sucesso.</S.Title>
-            <S.Description>Obrigado pela comrpa!</S.Description>
-            <S.StartShopping href="/">Realizar nova compra</S.StartShopping>
-          </S.WrapperFinished>
-        </S.ContainerFinished>
-      </S.Wrapper>
+          <WrapperFinished>
+            <Title>Pedido Relizado com Sucesso.</Title>
+            <Description>Obrigado pela comrpa!</Description>
+            <StartShopping href="/">Realizar nova compra</StartShopping>
+          </WrapperFinished>
+        </ContainerFinished>
+      </Wrapper>
     </Container>
   );
 };

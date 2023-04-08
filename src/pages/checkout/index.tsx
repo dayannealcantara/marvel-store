@@ -1,5 +1,20 @@
 import Header from 'components/Header';
-import * as S from './styles';
+import {
+  Wrapper,
+  Title,
+  Image,
+  WrapperDatails,
+  WrapperProducts,
+  WrapperData,
+  WrapperInfo,
+  Name,
+  Price,
+  Total,
+  Form,
+  ContainerInput,
+  Button,
+  SubTitle
+} from './styles';
 import { useCart } from 'context/useCart';
 import { formatPrice } from 'utils/format';
 import { useRouter } from 'next/router';
@@ -39,36 +54,35 @@ const Checkout = () => {
   return (
     <Container>
       <Header totalCard={cart.length} cartActive={false} />
-      <S.Wrapper>
-        <S.Title>Finalziar Pedido</S.Title>
+      <Wrapper>
+        <Title>Finalziar Pedido</Title>
 
-        <S.WrapperData>
-          <S.WrapperDatails>
+        <WrapperData>
+          <WrapperDatails>
             <div>
-              <S.SubTitle> Resumo do pedido </S.SubTitle>
-
+              <SubTitle> Resumo do pedido </SubTitle>
               {cartFormatted.map((product) => (
-                <S.WrapperProducts key={product.id}>
-                  <S.Image
+                <WrapperProducts key={product.id}>
+                  <Image
                     src={`${product.thumbnail.path}/portrait_incredible.${product.thumbnail.extension}`}
                     alt={product.title}
                   />
-                  <S.WrapperInfo>
+                  <WrapperInfo>
                     <div>
-                      <S.Name>{product.title}</S.Name>
-                      <S.Name>Quatidade: {product.amount}</S.Name>
+                      <Name>{product.title}</Name>
+                      <Name>Quatidade: {product.amount}</Name>
                     </div>
-                    <S.Price>{product.priceFormatted}</S.Price>
-                  </S.WrapperInfo>
-                </S.WrapperProducts>
+                    <Price>{product.priceFormatted}</Price>
+                  </WrapperInfo>
+                </WrapperProducts>
               ))}
             </div>
-            <S.Total>
+            <Total>
               <span>TOTAL</span>
               <strong>{total}</strong>
-            </S.Total>
-          </S.WrapperDatails>
-          <S.WrapperDatails>
+            </Total>
+          </WrapperDatails>
+          <WrapperDatails>
             <div
               style={{
                 display: 'flex',
@@ -77,7 +91,7 @@ const Checkout = () => {
                 height: '100% '
               }}
             >
-              <S.SubTitle> Endereço de entrega</S.SubTitle>
+              <SubTitle> Endereço de entrega</SubTitle>
               {!address ? (
                 <FormAddress setAddress={setAddress} />
               ) : (
@@ -98,14 +112,12 @@ const Checkout = () => {
                 </div>
               )}
               {address && (
-                <S.Button onClick={handleClickCheckout}>
-                  Finalizar Pedido
-                </S.Button>
+                <Button onClick={handleClickCheckout}>Finalizar Pedido</Button>
               )}
             </div>
-          </S.WrapperDatails>
-        </S.WrapperData>
-      </S.Wrapper>
+          </WrapperDatails>
+        </WrapperData>
+      </Wrapper>
     </Container>
   );
 };
