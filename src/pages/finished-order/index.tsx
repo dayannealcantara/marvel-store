@@ -6,11 +6,11 @@ import {
   Title,
   Description,
   StartShopping
-} from './styles';
+} from 'styles/finishedOrder.styles';
 
 import { Check2Circle } from '@styled-icons/bootstrap/Check2Circle';
 
-import { Container } from 'pages/styles';
+import { Container } from 'styles/home.styles';
 
 const FinishedOrder = () => {
   return (

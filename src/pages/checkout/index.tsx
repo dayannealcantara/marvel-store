@@ -12,7 +12,7 @@ import {
   Total,
   Button,
   SubTitle
-} from './styles';
+} from 'styles/checkout.styles';
 import { useCart } from 'context/useCart';
 import { formatPrice } from 'utils/format';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ import { useRouter } from 'next/router';
 import FormAddress, { FormData } from 'components/FormAddress';
 import MapContainer from 'components/Map';
 import { useState } from 'react';
-import { Container } from 'pages/styles';
+import { Container } from 'styles/home.styles';
 
 const Checkout = () => {
   const { cart, setCart } = useCart();

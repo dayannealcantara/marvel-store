@@ -1,7 +1,7 @@
 import Header from 'components/Header';
 
 import Head from 'next/head';
-import * as S from './styles';
+import { Container } from 'styles/home.styles';
 
 import { useCart } from 'context/useCart';
 import { ComicsList } from '../components/ComicsList';
@@ -17,10 +17,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <S.Container>
+      <Container>
         <Header totalCard={cart.length} />
         <ComicsList />
-      </S.Container>
+      </Container>
     </>
   );
 }

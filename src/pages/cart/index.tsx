@@ -12,7 +12,7 @@ import {
   Total,
   Title,
   TotalComics
-} from './styles';
+} from 'styles/cart.styles';
 import { Delete } from '@styled-icons/material/Delete';
 import { RemoveCircleOutline } from '@styled-icons/material/RemoveCircleOutline';
 import { AddCircleOutline } from '@styled-icons/material/AddCircleOutline';
